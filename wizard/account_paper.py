@@ -34,11 +34,11 @@ class AccountPaper(models.TransientModel):
 				dict(move._fields['bond_type'].selection).get(move.bond_type),
 				move.bond_number,
 				index,
-				move.amount_total_signed,
+				"${:,.2f}".format(move.amount_total_signed),
 				credit_account_id.group_id.display_name if credit_account_id.group_id.display_name else '',
-				credit,
+				"${:,.2f}".format(credit),
 				debit_account_id.group_id.display_name if debit_account_id.group_id.display_name else '',
-				debit,
+				"${:,.2f}".format(debit),
 			))
 			index += 1
 

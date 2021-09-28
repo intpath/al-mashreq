@@ -1,0 +1,99 @@
+<odoo>
+	<data>
+
+		<template id="payment_report">
+			 <t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+				 	<div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+						<div class="page">
+							<div class="row">
+								<div class="col-4">
+								</div>
+								<div class="col-4" style="text-align: center;">
+									<h3 style="text-decoration: underline;">مسند الصرف</h3>
+									<h5 style="direction: ltr;"><span t-field="o.partner_id" /> :المدفوع له</h5>
+								</div>
+								<div class="col-4" style="text-align: right;">
+									<div style="border: solid 2px black">
+										<p><span t-field="o.company_id"/> :إسام الدائرة</p>
+										<p> :رقم السند</p>
+										<p><span t-field="o.date"/> :تاريخ السند</p>
+									</div>
+								</div>
+							</div>
+							<table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">
+								<style>
+									td, th, table{
+									  border: 1px solid black;
+									}
+								</style>
+								<thead>
+									<tr style="">
+										<td>رقم الدليل المحاسبي</td>
+										<td>إسم الحساب و تفاصيله</td>
+										<td>مبلغ دائن</td>
+										<td>مبلغ مدين</td>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-set="total_credit" t-value="0"/>
+									<t t-set="total_debit" t-value="0"/>
+									<t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
+										<t t-set="move_id" t-value="rec[2].move_id"/>
+										<t t-foreach="move_id.line_ids" t-as="line">
+											<t t-set="total_credit" t-value="total_credit + line.credit"/>
+											<t t-set="total_debit" t-value="total_debit + line.debit"/>
+											<tr>
+												<td><p align="center" t-field="move_id.bond_number"/></td>
+												<td><p t-field="line.name"/></td>
+												<td><p t-field="line.debit"/></td>
+												<td><p t-field="line.credit"/></td>
+											</tr>
+										</t>
+									</t>
+									<t t-foreach="o.move_id.line_ids" t-as="line">
+										<t t-set="total_credit" t-value="total_credit + line.credit"/>
+										<t t-set="total_debit" t-value="total_debit + line.debit"/>
+										<tr>
+											<td><p align="center" t-field="line.move_id.bond_number"/></td>
+											<td><p t-field="line.name"/></td>
+											<td><p t-field="line.debit"/></td>
+											<td><p t-field="line.credit"/></td>
+										</tr>
+									</t>
+									<tr>
+										<td></td>
+										<td><p>المجموع فقط</p></td>
+										<td><p t-esc="total_debit"/></td>
+										<td><p t-esc="total_credit"/></td>
+									</tr>									
+								</tbody>
+							</table>
+							<div style="text-align: right; border: solid 2px black; overflow: hidden;">
+								<div class="row" style="padding: 20px 0 80px; border-bottom: solid 2px black; ">
+									<div class="col-2">المدير العام</div>
+									<div class="col-2">مدير الحسابات</div>
+									<div class="col-2">المدقق</div>
+									<div class="col-2">المحاسب</div>
+									<div class="col-2">المنظم</div>
+								</div>
+								<div style="direction: ltr; padding: 20px;">
+									<p>__________________________________________________________________________ :اني الموقع ادناه إستلمت من</p>
+									<p></p>
+									<p>__________________________________________________________________________ :مبلغا قدره فقط</p>
+									<p></p>
+									<div class="row">
+										<div class="col-6"></div>
+										<div class="col-3">:التوقيع</div>
+										<div class="col-3">:اسم المستلم</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				 	</div>
+				</t>
+            </t>
+		</template>
+
+	</data>
+</odoo>

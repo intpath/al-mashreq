@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Al-Mashreq university",
+    'name': "Al-Mashreq University",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -22,7 +22,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
-        'report/xlsx_report_action.xml',
+        'report/payment_report.xml',
+        'report/report_actions.xml',
         'wizard/account_paper_view.xml',
     ],
 }

@@ -1,7 +1,7 @@
 <odoo>
 	<data>
 
-		<template id="payment_report">
+		<template id="payment_spending_report">
 			 <t t-call="web.html_container">
 				<t t-foreach="docs" t-as="o">
 				 	<div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
@@ -30,7 +30,8 @@
 								<thead>
 									<tr style="">
 										<td>رقم الدليل المحاسبي</td>
-										<td>إسم الحساب و تفاصيله</td>
+										<td>التفاصيل</td>
+										<td>إسم الحساب</td>
 										<td>مبلغ دائن</td>
 										<td>مبلغ مدين</td>
 									</tr>
@@ -46,6 +47,7 @@
 											<tr>
 												<td><p align="center" t-field="move_id.bond_number"/></td>
 												<td><p t-field="line.name"/></td>
+												<td><p t-field="line.account_id"/></td>
 												<td><p t-field="line.debit"/></td>
 												<td><p t-field="line.credit"/></td>
 											</tr>
@@ -63,7 +65,7 @@
 									</t>
 									<tr>
 										<td></td>
-										<td><p>المجموع فقط</p></td>
+										<td col="2"><p>المجموع فقط</p></td>
 										<td><p t-esc="total_debit"/></td>
 										<td><p t-esc="total_credit"/></td>
 									</tr>									
@@ -94,6 +96,139 @@
 				</t>
             </t>
 		</template>
+
+		<template id="payment_recieving_report">
+			 <t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+				 	<div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+						<div class="page">
+							<div class="row" style="mragin-bottom: 20px;">
+								<h3 class="col-12" style="text-align: center;">وصل قبض</h3>
+							</div>
+							<div class="row">
+								<div class="col-6" style="direction: rtl; text-align: left;">
+									<p>رقم: <span t-field="o.name"/></p>
+								</div>
+								<div class="col-6" style="direction: rtl; text-align: right;">
+									<p>إسم الدائرة: <span t-field="o.company_id"/></p>
+									<p>وصل:</p>
+									<p>التاريخ: <span t-field="o.date"/></p>
+								</div>
+							</div>
+							<table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">
+								<style>
+									td, th, table{
+									  border: 1px solid black;
+									}
+								</style>
+								<thead>
+									<tr>
+										<td>التفاصيل</td>
+										<td>رقم الدليل</td>
+										<td>إسم الحساب</td>
+										<td>المبلغ</td>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="o.move_id.line_ids.filtered(lambda x: x.debit > 0)" t-as="line">
+										<tr>
+											<td><span t-field="o.ref"/></td>
+											<td><span t-field="line.account_id.code"/></td>
+											<td><span t-field="line.account_id.name"/></td>
+											<td><span t-field="line.debit"/></td>
+										</tr>
+									</t>
+									<tr>
+										<td colspan="3" style="direcion: rtl;">
+											<p> المجموع <span t-field="o.amount"/></p>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<div style="direction: rtl; text-align: right;">
+								<div class="row w-full">
+									<p class="col-8"> :استلمت المبلغ أعلاه و قدره</p>
+									<p class="col-4">دينار</p>
+								</div>
+								<p>من السيد</p>
+								<p>نقداً/ رقم الصك</p>
+							</div>
+							<div>
+								<p>توقيع أمين الصندوق</p>
+							</div>
+						</div>
+				 	</div>
+				</t>
+            </t>
+		</template>
+
+		<template id="account_move_template">
+			 <t t-call="web.html_container">
+				<t t-set="o" t-value="docs[0]"/>
+				<div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+					<div class="page">
+						<div class="row">
+							<div class="col-12" style="text-align: center;">
+								<h3 style="text-decoration: underline;">مسند قيد اليومية</h3>
+							</div>
+						</div>
+						<div style="direction: rtl; text-align: right; margin-top: 20px;">
+							<p>إسم الدائرة: <span t-field="o.company_id"/></p>
+							<p>الرقم: <span t-field="o.name"/></p>
+							<p>التاريخ: <span t-field="o.date"/></p>
+							<p>رقم الصفحة اليومية:</p>
+						</div>
+						<table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">
+							<style>
+								td, th, table{
+									border: 1px solid black;
+								}
+							</style>
+							<thead>
+								<tr style="text-align: center;">
+									<td>رقم الدليل المحاسبي</td>
+									<td>التفاصيل</td>
+									<td>إسم الحساب</td>
+									<td>دائن</td>
+									<td>مدين</td>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-set="total_credit" t-value="0"/>
+								<t t-set="total_debit" t-value="0"/>
+								<t t-foreach="docs.line_ids" t-as="line">
+									<t t-set="total_credit" t-value="total_credit + line.credit"/>
+									<t t-set="total_debit" t-value="total_debit + line.debit"/>
+									<tr>
+										<td><p align="center" t-field="line.move_id.bond_number"/></td>
+										<td><p t-field="line.name"/></td>
+										<td><p t-field="line.account_id"/></td>
+										<td><p t-field="line.debit"/></td>
+										<td><p t-field="line.credit"/></td>
+									</tr>
+								</t>
+								<tr>
+									<td colspan="3" style="direction: rtl; text-align: right;"><p>المجموع فقط</p></td>
+									<td><p t-esc="total_debit"/></td>
+									<td><p t-esc="total_credit"/></td>
+								</tr>									
+							</tbody>
+						</table>
+						<div style="text-align: right; overflow: hidden;">
+							<div class="row" style="padding: 20px 0 80px;">
+								<div class="col-2">رئيس الدائرة</div>
+								<div class="col-2">مدير الحسابات</div>
+								<div class="col-2">المدقق</div>
+								<div class="col-2">المحاسب</div>
+								<div class="col-2">المنظم</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            </t>
+		</template>
+
 
 	</data>
 </odoo>

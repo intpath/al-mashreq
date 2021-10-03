@@ -23,6 +23,7 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'report/payment_report.xml',
+        'report/account_move_report.xml',
         'report/report_actions.xml',
         'wizard/account_paper_view.xml',
         'report/report_layout.xml',

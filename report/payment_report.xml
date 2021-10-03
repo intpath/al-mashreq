@@ -135,7 +135,14 @@
 											<td><span t-field="o.ref"/></td>
 											<td><span t-field="line.account_id.code"/></td>
 											<td><span t-field="line.account_id.name"/></td>
-											<td><span t-field="line.debit or line.credit"/></td>
+											<td>
+												<t t-if="line.debit">
+													<span t-field="line.debit"/>
+												</t>
+												<t t-else="else">
+													<span t-field="line.credit"/>
+												</t>
+											</td>
 										</tr>
 									</t>
 									<tr>

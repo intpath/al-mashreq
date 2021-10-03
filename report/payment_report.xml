@@ -102,6 +102,11 @@
 				<t t-foreach="docs" t-as="o">
 				 	<div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
 						<div class="page">
+							<!-- <div style="margin-bottom: 20px;"> -->
+								<div style="width: 100%;">
+									<img style="display: block; margin: 0 auto; width: 150px;" t-att-src="image_data_uri(o.company_id.logo)"/>
+								</div>
+							<!-- </div> -->
 							<div class="row" style="mragin-bottom: 20px;">
 								<h3 class="col-12" style="text-align: center;">وصل قبض</h3>
 							</div>

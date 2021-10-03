@@ -12,5 +12,5 @@ class AccountMove(models.Model):
 		('payment_document', 'مستند القيد')
 	]
 
-	bond_type = fields.Selection(BOND_SELECTION, "نوع السند")
-	bond_number = fields.Integer("رقم السند")
+	bond_type = fields.Selection(BOND_SELECTION, "نوع السند", readonly=True, states={'draft': [('readonly', False)]} )
+	bond_number = fields.Integer("رقم السند", readonly=True, states={'draft': [('readonly', False)]} )

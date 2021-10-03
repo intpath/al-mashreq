@@ -16,7 +16,7 @@
     'version': '14.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'account_accountant', 'report_xlsx'],
+    'depends': ['base', 'web', 'account_accountant', 'report_xlsx'],
 
     # always loaded
     'data': [
@@ -25,5 +25,6 @@
         'report/payment_report.xml',
         'report/report_actions.xml',
         'wizard/account_paper_view.xml',
+        'report/report_layout.xml',
     ],
 }

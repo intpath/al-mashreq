@@ -110,7 +110,7 @@
 									<p>رقم: <span t-field="o.name"/></p>
 								</div>
 								<div class="col-6" style="direction: rtl; text-align: right;">
-									<p>إسم الدائرة: <span t-field="o.company_id"/></p>
+									<p><span t-field="o.company_id"/></p>
 									<p>وصل:</p>
 									<p>التاريخ: <span t-field="o.date"/></p>
 								</div>
@@ -130,7 +130,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<t t-foreach="o.move_id.line_ids.filtered(lambda x: x.debit > 0)" t-as="line">
+									<t t-foreach="o.move_id.line_ids" t-as="line">
 										<tr>
 											<td><span t-field="o.ref"/></td>
 											<td><span t-field="line.account_id.code"/></td>
@@ -151,7 +151,7 @@
 									<p class="col-8"> :استلمت المبلغ أعلاه و قدره</p>
 									<p class="col-4">دينار</p>
 								</div>
-								<p>من السيد</p>
+								<p>من السيد: <span t-field="o.partner_id"/></p>
 								<p>نقداً/ رقم الصك</p>
 							</div>
 							<div>

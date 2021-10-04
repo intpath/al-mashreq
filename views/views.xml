@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <record id="account_paper_action" model="ir.actions.act_window">
+            <field name="name">Account Paper</field>
+            <field name="res_model">account.paper</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="دفتر المحاسب" id="paper_reprt_menu_item" parent="account.account_reports_management_menu" action="al-mashreq.account_paper_action" />
+
+    </data>
+</odoo>

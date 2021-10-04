@@ -1,0 +1,243 @@
+<odoo>
+    <data>
+
+        <template id="payment_spending_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4" style="text-align: center;">
+                                    <h3 style="text-decoration: underline;">مسند الصرف</h3>
+                                    <h5>
+                                        المدفوع له:
+                                        <span t-field="o.partner_id" />
+                                    </h5>
+                                </div>
+                                <div class="col-4" style="text-align: right;">
+                                    <div style="border: solid 2px black; padding: 10px;">
+                                        <p>
+                                            <span t-field="o.company_id" />
+                                        </p>
+                                        <p> :رقم السند</p>
+                                        <p>
+                                            <span t-field="o.date" />
+                                            :تاريخ السند
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">
+                                <style>
+									td, th, table{
+									  border: 1px solid black;
+									}
+								</style>
+                                <thead>
+                                    <tr style="">
+                                        <td>التفاصيل</td>
+                                        <td>إسم الحساب</td>
+                                        <td>مبلغ دائن</td>
+                                        <td>مبلغ مدين</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_credit" t-value="0" />
+                                    <t t-set="total_debit" t-value="0" />
+                                    <t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
+                                        <t t-set="move_id" t-value="rec[2].move_id" />
+                                        <t t-foreach="move_id.line_ids" t-as="line">
+                                            <t t-set="total_credit" t-value="total_credit + line.credit" />
+                                            <t t-set="total_debit" t-value="total_debit + line.debit" />
+                                            <tr>
+                                                <td>
+                                                    <p t-field="line.name" />
+                                                </td>
+                                                <td>
+                                                    <p t-field="line.account_id" />
+                                                </td>
+                                                <td>
+                                                    <p t-field="line.debit" />
+                                                </td>
+                                                <td>
+                                                    <p t-field="line.credit" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <t t-foreach="o.move_id.line_ids" t-as="line">
+                                        <t t-set="total_credit" t-value="total_credit + line.credit" />
+                                        <t t-set="total_debit" t-value="total_debit + line.debit" />
+                                        <tr>
+                                            <td>
+                                                <p t-field="line.name" />
+                                            </td>
+                                            <td>
+                                                <p t-field="line.account_id" />
+                                            </td>
+                                            <td>
+                                                <p t-field="line.debit" />
+                                            </td>
+                                            <td>
+                                                <p t-field="line.credit" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td></td>
+                                        <td col="2">
+                                            <p>المجموع فقط</p>
+                                        </td>
+                                        <td>
+                                            <p t-esc="total_debit" />
+                                        </td>
+                                        <td>
+                                            <p t-esc="total_credit" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align: right; border: solid 2px black; overflow: hidden;">
+                                <div class="row" style="padding: 10px 0 70px; border-bottom: solid 2px black; ">
+                                    <div class="col-2">المدير العام</div>
+                                    <div class="col-2">مدير الحسابات</div>
+                                    <div class="col-2">المدقق</div>
+                                    <div class="col-2">المحاسب</div>
+                                    <div class="col-2">المنظم</div>
+                                </div>
+                                <div style="direction: ltr; padding: 20px;">
+                                    <p>__________________________________________________________________________ :اني الموقع ادناه إستلمت من</p>
+                                    <p></p>
+                                    <p>__________________________________________________________________________ :مبلغا قدره فقط</p>
+                                    <p></p>
+                                    <div class="row">
+                                        <div class="col-6"></div>
+                                        <div class="col-3">:التوقيع</div>
+                                        <div class="col-3">:اسم المستلم</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="payment_recieving_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                        <div class="page">
+                            <div style="width: 100%;">
+                                <img style="display: block; margin: 0 auto; width: 150px;" t-att-src="image_data_uri(o.company_id.logo)" />
+                            </div>
+                            <div class="row" style="mragin-bottom: 20px;">
+                                <h3 class="col-12" style="text-align: center;">وصل قبض</h3>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="direction: rtl; text-align: right; margin-bottom: 15px;">جامعة المشرق</h4>
+                            <div style="direction: rtl; text-align: right;">
+                                <p>
+                                    رقم الوصل:
+                                    <span t-field="o.name" />
+                                </p>
+                            </div>
+                            <div style="direction: rtl; text-align: right;">
+                                <p>
+                                    التاريخ:
+                                    <span t-field="o.date" />
+                                </p>
+                            </div>
+                            <table class="table table-sm o_main_table" style="direction: rtl; margin: 10px 0px 30px 0px; font-size: large; border: solid 2px black;">
+                                <style>
+									.equil-w td{
+									  border: 1px solid black;
+									  width: 50%;
+									  text-align: right;
+									}
+								</style>
+                                <tbody class="equil-w">
+                                    <tr>
+                                        <td>اسم الطالب</td>
+                                        <td>x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الكلية</td>
+                                        <td>x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>القسم</td>
+                                        <td>x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>المرحلة</td>
+                                        <td>x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>نوع الدراسة</td>
+                                        <td>x</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">
+                                <style>
+									td, th, table{
+									  border: 1px solid black;
+                                      text-align: right;
+									}
+								</style>
+                                <thead>
+                                    <tr>
+                                        <td>التفاصيل</td>
+                                        <td>رقم الدليل</td>
+                                        <td>المبلغ</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.move_id.line_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-field="o.ref" />
+                                            </td>
+                                            <td>
+                                                <span t-field="line.account_id.code" />
+                                            </td>
+
+                                            <td>
+                                                <span t-field="o.amount" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td colspan="3" style="direcion: rtl;">
+                                            <p>
+                                                المجموع
+                                                <span t-field="o.amount" />
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row " style="margin: 20px 1px 0px 1px">
+
+                                <div col="6">
+                                    <p>توقيع أمين الصندوق</p>
+                                </div>
+                                <div col="6" style="padding-left: 34.5rem">
+                                    <p>
+                                        نوع السداد:
+                                        <span t-field="o.pay_type" />
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

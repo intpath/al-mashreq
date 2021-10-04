@@ -1,0 +1,78 @@
+<odoo>
+	<data>
+
+        <record id="paperformat_headless_landscape" model="report.paperformat">
+			<field name="name">Headless A4 Landscape</field>
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Landscape</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">10</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">10</field>
+			<field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_headless_portrait" model="report.paperformat">
+			<field name="name">Headless A4 Landscape</field>
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">10</field>
+			<field name="margin_left">10</field>
+			<field name="margin_right">10</field>
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">10</field>
+			<field name="dpi">90</field>
+        </record>
+
+        <record id="account_paper_report_action" model="ir.actions.report">
+			<field name="name">دليل المحاسب</field>
+			<field name="model">account.paper</field>
+			<field name="report_type">xlsx</field>
+			<field name="report_name">report_xlsx.account_paper_report</field>
+			<field name="report_file">account_paper_report</field>
+            <field name="print_report_name">'دليل المحاسب'</field>
+		</record>
+
+        <record id="payment_spending_report_action" model="ir.actions.report">
+			<field name="name">مستند الصرف</field>
+			<field name="model">account.payment</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">al-mashreq.payment_spending_report</field>
+			<field name="report_file">al-mashreq.payment_spending_report</field>
+			<field name="paperformat_id" ref="al-mashreq.paperformat_headless_landscape" />
+            <field name="print_report_name">'مستند الصرف %s' % (object.name)</field>
+            <field name="attachment_use">True</field>
+		</record>
+
+        <record id="payment_recieving_report_action" model="ir.actions.report">
+			<field name="name">وصل القبض</field>
+			<field name="model">account.payment</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">al-mashreq.payment_recieving_report</field>
+			<field name="report_file">al-mashreq.payment_recieving_report</field>
+			<field name="paperformat_id" ref="al-mashreq.paperformat_headless_portrait" />
+            <field name="print_report_name">'وصل القبض %s' % (object.name)</field>
+            <field name="attachment_use">True</field>
+		</record>
+
+        <record id="account_move_report_action" model="ir.actions.report">
+			<field name="name">سند قيد اليومية</field>
+			<field name="model">account.move</field>
+			<field name="report_type">qweb-pdf</field>
+			<field name="report_name">al-mashreq.account_move_template</field>
+			<field name="report_file">al-mashreq.account_move_template</field>
+			<field name="paperformat_id" ref="al-mashreq.paperformat_headless_landscape" />
+            <field name="print_report_name">'سند قيد اليومية %s' % (object.name)</field>
+            <field name="attachment_use">True</field>
+		</record>
+
+
+	</data>
+</odoo>

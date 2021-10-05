@@ -9,10 +9,21 @@
             <field name="inherit_id" ref="account.view_account_payment_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='payment_type']" position="after">
-                    <field name="pay_type" />
+                    <field name="recieve_type" />
                 </xpath>
             </field>
         </record>
+        <record id="op_student_stage_tree" model="ir.ui.view">
+            <field name="name">op_student_stage_.tree</field>
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="stage" />
+                </xpath>
+            </field>
+        </record>
+
 
     </data>
 

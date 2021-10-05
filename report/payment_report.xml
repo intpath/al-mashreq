@@ -161,23 +161,33 @@
                                 <tbody class="equil-w">
                                     <tr>
                                         <td>اسم الطالب</td>
-                                        <td>x</td>
+                                        <td>
+                                            <span t-field="o.partner_id.student_id.name" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>الكلية</td>
-                                        <td>x</td>
+                                        <td>
+                                            <div t-esc="o.get_latest_rec(o.partner_id.student_id.course_detail_ids).course_id.name" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>القسم</td>
-                                        <td>x</td>
+                                        <td>
+                                            <div t-esc="o.get_latest_rec(o.partner_id.student_id.course_detail_ids).batch_id.name" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>المرحلة</td>
-                                        <td>x</td>
+                                        <td>
+                                            <span t-field="o.partner_id.student_id.stage" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>نوع الدراسة</td>
-                                        <td>x</td>
+                                        <td>
+                                            <span t-field="o.partner_id.student_id.category_id" />
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -196,20 +206,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <t t-foreach="o.move_id.line_ids" t-as="line">
-                                        <tr>
-                                            <td>
-                                                <span t-field="o.ref" />
-                                            </td>
-                                            <td>
-                                                <span t-field="line.account_id.code" />
-                                            </td>
+                                    <tr>
+                                        <td>
+                                            <span t-field="o.ref" />
+                                        </td>
+                                        <td>
+                                            <span t-field="o.destination_account_id.code" />
+                                        </td>
 
-                                            <td>
-                                                <span t-field="o.amount" />
-                                            </td>
-                                        </tr>
-                                    </t>
+                                        <td>
+                                            <span t-field="o.amount" />
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td colspan="3" style="direcion: rtl;">
                                             <p>
@@ -228,7 +236,7 @@
                                 <div col="6" style="padding-left: 34.5rem">
                                     <p>
                                         نوع السداد:
-                                        <span t-field="o.pay_type" />
+                                        <span t-field="o.recieve_type" />
                                     </p>
                                 </div>
                             </div>

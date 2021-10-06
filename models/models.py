@@ -33,7 +33,11 @@ class AccountPayment(models.Model):
 		options = account_partner_ledger._get_options()
 		options['partner_ids'] = [self.partner_id.id]
 		lines = account_partner_ledger._get_partner_ledger_lines(options)
-		total_balance = float(lines[-1]['columns'][-1]['name'].split()[-1].replace(',', ''))
+		if self.env.company.currency_id.position == 'before':
+			total_balance = float(lines[-1]['columns'][-1]['name'].split()[-1].replace(',', ''))
+		else:
+			total_balance = float(lines[-1]['columns'][-1]['name'].split()[-2].replace(',', ''))
+
 		self.real_partner_due = total_balance
 
 	def get_latest_rec(self, records):

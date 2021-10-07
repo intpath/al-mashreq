@@ -18,6 +18,10 @@ class AccountMove(models.Model):
     bond_number = fields.Integer("رقم السند", readonly=True, states={
                                  'draft': [('readonly', False)]})
 
+class AccountAccount(models.Model):
+	_inherit = "account.account"
+
+	exclude_from_payment_spending_report = fields.Boolean("Exclude from سند الصرف", copy=False, groups="base.group_no_one")
 
 class AccountPayment(models.Model):
 	_inherit = "account.payment"

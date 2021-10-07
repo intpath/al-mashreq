@@ -48,9 +48,9 @@
                                     <t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
                                         <t t-set="move_id" t-value="rec[2].move_id" />
                                         <t t-foreach="move_id.line_ids" t-as="line">
-                                            <t t-set="total_credit" t-value="total_credit + line.credit" />
-                                            <t t-set="total_debit" t-value="total_debit + line.debit" />
-                                            <tr>
+                                            <tr t-if="not line.account_id.exclude_from_payment_spending_report">
+                                                <t t-set="total_credit" t-value="total_credit + line.credit" />
+                                                <t t-set="total_debit" t-value="total_debit + line.debit" />
                                                 <td>
                                                     <p t-field="line.name" />
                                                 </td>
@@ -67,9 +67,9 @@
                                         </t>
                                     </t>
                                     <t t-foreach="o.move_id.line_ids" t-as="line">
-                                        <t t-set="total_credit" t-value="total_credit + line.credit" />
-                                        <t t-set="total_debit" t-value="total_debit + line.debit" />
-                                        <tr>
+                                        <tr t-if="not line.account_id.exclude_from_payment_spending_report">
+                                            <t t-set="total_credit" t-value="total_credit + line.credit" />
+                                            <t t-set="total_debit" t-value="total_debit + line.debit" />
                                             <td>
                                                 <p t-field="line.name" />
                                             </td>

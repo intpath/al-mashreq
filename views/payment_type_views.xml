@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <data>
 
         <record id="payment_type_tree" model="ir.ui.view">
@@ -13,6 +12,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="op_student_stage_tree" model="ir.ui.view">
             <field name="name">op_student_stage_.tree</field>
             <field name="model">op.student</field>
@@ -24,8 +24,16 @@
             </field>
         </record>
 
+        <record id="account_account_tree" model="ir.ui.view">
+            <field name="name">account.account.tree</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='reconcile']" position="after">
+                    <field name="exclude_from_payment_spending_report" widget="boolean_toggle"/>
+                </xpath>
+            </field>
+        </record>
 
     </data>
-
-
 </odoo>

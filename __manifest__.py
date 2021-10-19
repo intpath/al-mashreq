@@ -16,7 +16,7 @@
     'version': '14.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web', 'account_accountant', 'report_xlsx'],
+    'depends': ['base', 'web', 'account_accountant', 'report_xlsx', "almashreq_educat"],
 
     # always loaded
     'data': [

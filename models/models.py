@@ -66,10 +66,3 @@ class Student(models.Model):
             student_id = self.env['op.student'].search(
                 [('partner_id', '=', record.id)])
             record.student_id = student_id.id
-
-
-class Stage(models.Model):
-    _inherit = 'op.student'
-
-    stage = fields.Selection([('first', 'الاولى'), ('second', 'الثانية'), ('third', 'الثالثه'), (
-        'fourth', 'الرابعة'), ('fifth', 'الخامسة'), ('sixth', 'السادسة')], string="المرحلة")

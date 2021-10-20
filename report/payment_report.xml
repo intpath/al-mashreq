@@ -162,19 +162,19 @@
                                     <tr>
                                         <td>اسم الطالب</td>
                                         <td>
-                                            <span t-field="o.partner_id.student_id" />
+                                            <span t-field="o.partner_id.student_id.name" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>الكلية</td>
                                         <td>
-                                            <div t-esc="o.partner_id.student_id.college_id" />
+                                            <div t-esc="o.partner_id.student_id.college_id.name" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>القسم</td>
                                         <td>
-                                            <div t-esc="o.get_latest_rec(o.partner_id.student_id.course_detail_ids).course_id" />
+                                            <div t-esc="o.get_latest_rec(o.partner_id.student_id.course_detail_ids).course_id.name" />
                                         </td>
                                     </tr>
                                     <tr>

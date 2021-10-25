@@ -241,7 +241,10 @@
                             <div class="row " style="margin: 20px 1px 0px 1px">
 
                                 <div col="6">
+                                    <br/>
+                                    <br/>
                                     <p>توقيع أمين الصندوق</p>
+                                    <p><span t-field="o.create_uid" /></p>
                                 </div>
                                 <div col="6" style="padding-left: 34.5rem">
                                     <p>

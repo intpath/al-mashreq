@@ -31,6 +31,13 @@ class AccountPayment(models.Model):
 	company_currency_id = fields.Many2one("res.currency", default=lambda self: self.env.company.currency_id.id, readonly=True, copy=False)
 	recieve_type = fields.Selection([('cash', 'نقد'), ('check', 'صك')], string="نوع السداد")
 
+
+
+	course_detail_ids = fields.One2many(string="dept",related="partner_id.student_id.course_detail_ids")
+	department = fields.Many2one(string="dept", related="course_detail_ids.course_id")
+	stage = fields.Selection(string="stage", related="partner_id.student_id.stage")
+	category = fields.Many2one(string="category", related="partner_id.student_id.category_id")
+
 	@api.onchange('partner_id')
 	def _compute_partner_due(self):
 		account_partner_ledger = self.env['account.partner.ledger'].with_context({'default_partner_id': self.partner_id.id})

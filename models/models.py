@@ -33,10 +33,21 @@ class AccountPayment(models.Model):
 
 
 
-	course_detail_ids = fields.One2many(string="Courses List", related="partner_id.student_id.course_detail_ids", store=True)
-	department = fields.Many2one(string="Dept", related="course_detail_ids.course_id", store=True)
+	department = fields.Many2one('op.course', string="Dept", compute="_compute_department", store=True)
 	stage = fields.Selection(string="Stage", related="partner_id.student_id.stage", store=True)
 	category = fields.Many2one(string="Category", related="partner_id.student_id.category_id", store=True)
+
+	@api.depends('partner_id')
+	def _compute_department(self):
+		for record in self:
+			course_id = self.env['op.student.course'].search(
+					[('student_id', '=', record.partner_id.student_id.id)])
+					
+			temp = course_id[0]
+			for line in course_id:
+				if temp.batch_id.start_date < line.batch_id.start_date:
+					temp = line
+			record.department = temp.course_id
 
 	@api.onchange('partner_id')
 	def _compute_partner_due(self):
@@ -73,3 +84,4 @@ class Student(models.Model):
             student_id = self.env['op.student'].search(
                 [('partner_id', '=', record.id)])
             record.student_id = student_id.id
+

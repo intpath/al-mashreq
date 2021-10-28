@@ -33,10 +33,10 @@ class AccountPayment(models.Model):
 
 
 
-	course_detail_ids = fields.One2many(string="dept",related="partner_id.student_id.course_detail_ids")
-	department = fields.Many2one(string="dept", related="course_detail_ids.course_id")
-	stage = fields.Selection(string="stage", related="partner_id.student_id.stage")
-	category = fields.Many2one(string="category", related="partner_id.student_id.category_id")
+	course_detail_ids = fields.One2many(string="Courses List", related="partner_id.student_id.course_detail_ids", store=True)
+	department = fields.Many2one(string="Dept", related="course_detail_ids.course_id", store=True)
+	stage = fields.Selection(string="Stage", related="partner_id.student_id.stage", store=True)
+	category = fields.Many2one(string="Category", related="partner_id.student_id.category_id", store=True)
 
 	@api.onchange('partner_id')
 	def _compute_partner_due(self):

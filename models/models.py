@@ -42,13 +42,15 @@ class AccountPayment(models.Model):
 		for record in self:
 			course_id = self.env['op.student.course'].search(
 					[('student_id', '=', record.partner_id.student_id.id)])
-					
-			temp = course_id[0]
-			for line in course_id:
-				if temp.batch_id.start_date < line.batch_id.start_date:
-					# pass
-					temp = line
-			record.department = temp.course_id
+			if course_id:
+				temp = course_id[0]
+				for line in course_id:
+					if temp.batch_id.start_date < line.batch_id.start_date:
+						temp = line
+				record.department = temp.course_id
+			else:
+				record.department = False
+				
 
 	@api.onchange('partner_id')
 	def _compute_partner_due(self):

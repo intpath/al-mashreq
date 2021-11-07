@@ -1,30 +1,31 @@
 <odoo>
     <data>
-
         <template id="payment_spending_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
                         <div class="page">
                             <div class="row">
-                                <div class="col-4"></div>
-                                <div class="col-4" style="text-align: center;">
-                                    <h3 style="text-decoration: underline;">مسند الصرف</h3>
-                                    <h5>
-                                        المدفوع له:
-                                        <span t-field="o.partner_id" />
-                                    </h5>
-                                </div>
+                                <div class="col-4">
+                                    <img style="margin: 0 auto; width: 150px; padding-right: 5px; display: inline-block;" t-att-src="image_data_uri(o.company_id.logo)"/>
+                                  </div>
+                                  <div class="col-4" style="text-align: center;">  
+                                      <h3 style="text-decoration: underline; ">  مسند الصرف </h3>
+                                      <h5>
+                                          المدفوع له:
+                                          <span t-field="o.partner_id"/>
+                                      </h5>
+                                  </div>
                                 <div class="col-4" style="text-align: right;">
                                     <div style="border: solid 2px black; padding: 10px;">
                                         <p>
-                                            <span t-field="o.company_id" />
+                                            جامعة المشرق
                                         </p>
                                         <p> :رقم السند</p>
-                                        <p>
-                                            <span t-field="o.date" />
-                                            :تاريخ السند
-                                        </p>
+                                        <div >
+                                            <p style="display: inline-block;" t-field="o.date"/>
+                                            <p style="display: inline-block;"> :تاريخ السند</p>
+                                        </div>     
                                     </div>
                                 </div>
                             </div>
@@ -32,14 +33,15 @@
                                 <style>
 									td, th, table{
 									  border: 1px solid black;
+                                      text-align: right;
 									}
 								</style>
                                 <thead>
                                     <tr style="">
                                         <td>التفاصيل</td>
                                         <td>إسم الحساب</td>
-                                        <td>مبلغ دائن</td>
-                                        <td>مبلغ مدين</td>
+                                        <td>مبلغ دائن دينار</td>
+                                        <td>مبلغ مدين دينار</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,16 +54,16 @@
                                                 <t t-set="total_credit" t-value="total_credit + line.credit" />
                                                 <t t-set="total_debit" t-value="total_debit + line.debit" />
                                                 <td>
-                                                    <p t-field="line.name" />
+                                                    <p t-field="o.ref" />
                                                 </td>
                                                 <td>
                                                     <p t-field="line.account_id" />
                                                 </td>
                                                 <td>
-                                                    <p t-field="line.debit" />
+                                                    <p t-esc="o.add_comma(line.debit)"/>  
                                                 </td>
                                                 <td>
-                                                    <p t-field="line.credit" />
+                                                    <p t-esc="o.add_comma(line.credit)"/>
                                                 </td>
                                             </tr>
                                         </t>
@@ -71,16 +73,16 @@
                                             <t t-set="total_credit" t-value="total_credit + line.credit" />
                                             <t t-set="total_debit" t-value="total_debit + line.debit" />
                                             <td>
-                                                <p t-field="line.name" />
+                                                <p t-field="o.ref" />
                                             </td>
                                             <td>
                                                 <p t-field="line.account_id" />
                                             </td>
                                             <td>
-                                                <p t-field="line.debit" />
+                                                <p t-esc="o.add_comma(line.debit)"/>  
                                             </td>
                                             <td>
-                                                <p t-field="line.credit" />
+                                                <p t-esc="o.add_comma(line.credit)"/>
                                             </td>
                                         </tr>
                                     </t>

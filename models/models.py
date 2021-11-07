@@ -46,6 +46,7 @@ class AccountPayment(models.Model):
 			temp = course_id[0]
 			for line in course_id:
 				if temp.batch_id.start_date < line.batch_id.start_date:
+					# pass
 					temp = line
 			record.department = temp.course_id
 
@@ -72,6 +73,9 @@ class AccountPayment(models.Model):
 				tep = rec
 
 		return tep
+	def add_comma(self, value):
+		num = int(value) 
+		return f"{num: ,}"
 
 class Student(models.Model):
     _inherit = "res.partner"

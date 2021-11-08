@@ -228,16 +228,6 @@
                                             </p>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="3" style="text-align: right;">
-                                            <p>
-                                                <b>
-                                                    المجموع المتبقي بعد السداد:
-                                                </b>
-                                                <span t-field="o.real_partner_due" />
-                                            </p>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                             <div class="row " style="margin: 20px 1px 0px 1px">

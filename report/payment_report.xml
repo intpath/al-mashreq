@@ -54,7 +54,7 @@
                                                 <t t-set="total_credit" t-value="total_credit + line.credit" />
                                                 <t t-set="total_debit" t-value="total_debit + line.debit" />
                                                 <td>
-                                                    <p t-field="o.ref" />
+                                                    <p t-field="line.name" />
                                                 </td>
                                                 <td>
                                                     <p t-field="line.account_id" />
@@ -73,7 +73,7 @@
                                             <t t-set="total_credit" t-value="total_credit + line.credit" />
                                             <t t-set="total_debit" t-value="total_debit + line.debit" />
                                             <td>
-                                                <p t-field="line.name" />
+                                                <p t-field="o.ref" />
                                             </td>
                                             <td>
                                                 <p t-field="line.account_id" />

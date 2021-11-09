@@ -38,8 +38,8 @@
 								</style>
                                 <thead>
                                     <tr style="">
-                                        <td>التفاصيل</td>
                                         <td>إسم الحساب</td>
+                                        <td>التفاصيل</td>
                                         <td>مبلغ دائن دينار</td>
                                         <td>مبلغ مدين دينار</td>
                                     </tr>
@@ -54,16 +54,16 @@
                                                 <t t-set="total_credit" t-value="total_credit + line.credit" />
                                                 <t t-set="total_debit" t-value="total_debit + line.debit" />
                                                 <td>
+                                                    <p t-field="line.account_id.code" />
+                                                </td>
+                                                <td>
                                                     <p t-field="o.ref" />
                                                 </td>
                                                 <td>
-                                                    <p t-field="line.account_id" />
+                                                    <p t-esc="o.add_comma(line.credit)"/>
                                                 </td>
                                                 <td>
                                                     <p t-esc="o.add_comma(line.debit)"/>  
-                                                </td>
-                                                <td>
-                                                    <p t-esc="o.add_comma(line.credit)"/>
                                                 </td>
                                             </tr>
                                         </t>
@@ -73,35 +73,35 @@
                                             <t t-set="total_credit" t-value="total_credit + line.credit" />
                                             <t t-set="total_debit" t-value="total_debit + line.debit" />
                                             <td>
+                                                <p t-field="line.account_id.code" />
+                                            </td>
+                                            <td>
                                                 <p t-field="o.ref" />
-                                            </td>
-                                            <td>
-                                                <p t-field="line.account_id" />
-                                            </td>
-                                            <td>
-                                                <p t-esc="o.add_comma(line.debit)"/>  
                                             </td>
                                             <td>
                                                 <p t-esc="o.add_comma(line.credit)"/>
                                             </td>
+                                            <td>
+                                                <p t-esc="o.add_comma(line.debit)"/>  
+                                            </td>
                                         </tr>
                                     </t>
                                     <tr>
-                                        <td></td>
                                         <td col="2">
                                             <p>المجموع فقط</p>
                                         </td>
-                                        <td>
-                                            <p t-esc="total_debit" />
-                                        </td>
+                                        <td></td>
                                         <td>
                                             <p t-esc="total_credit" />
+                                        </td>
+                                        <td>
+                                            <p t-esc="total_debit" />
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div style="text-align: right; border: solid 2px black; overflow: hidden;">
-                                <div class="row" style="padding: 10px 0 70px; border-bottom: solid 2px black; ">
+                                <div class="row" style="padding: 70px 0 70px; border-bottom: solid 2px black; ">
                                     <div class="col-2">المدير العام</div>
                                     <div class="col-2">مدير الحسابات</div>
                                     <div class="col-2">المدقق</div>

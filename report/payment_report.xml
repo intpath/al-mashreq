@@ -57,7 +57,7 @@
                                                     <p t-field="line.account_id.code" />
                                                 </td>
                                                 <td>
-                                                    <p t-field="o.ref" />
+                                                    <p t-field="line.name" />
                                                 </td>
                                                 <td>
                                                     <p t-esc="o.add_comma(line.credit)"/>
@@ -225,16 +225,6 @@
                                             <p>
                                                 المجموع:
                                                 <span t-field="o.amount" />
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="text-align: right;">
-                                            <p>
-                                                <b>
-                                                    المجموع المتبقي بعد السداد:
-                                                </b>
-                                                <span t-field="o.real_partner_due" />
                                             </p>
                                         </td>
                                     </tr>

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from typing import Text
 from odoo import models, fields, api
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    # name = fields.Text()
     BOND_SELECTION = [
         ('check', 'صك'),
         ('payment_recieve', 'مستند القبض'),
@@ -13,10 +15,21 @@ class AccountMove(models.Model):
         ('payment_document', 'مستند القيد')
     ]
 
+	
     bond_type = fields.Selection(BOND_SELECTION, "نوع السند", readonly=True, states={
                                  'draft': [('readonly', False)]})
-    bond_number = fields.Integer("رقم السند", readonly=True, states={
+    bond_number = fields.Char("رقم السند", readonly=True, states={	
                                  'draft': [('readonly', False)]})
+
+class AccountMoveLine(models.Model):
+    _inherit = "account.move.line"
+    duplicate_name = fields.Text(string="Duplicate Name", compute="_on_change_name")
+
+    @api.onchange('name')
+    def _on_change_name(self):
+        for line in self:
+	        line.duplicate_name = line.name
+	
 
 class AccountAccount(models.Model):
 	_inherit = "account.account"

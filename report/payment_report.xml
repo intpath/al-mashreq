@@ -10,7 +10,7 @@
                                     <img style="margin: 0 auto; width: 150px; padding-right: 5px; display: inline-block;" t-att-src="image_data_uri(o.company_id.logo)"/>
                                   </div>
                                   <div class="col-4" style="text-align: center;">  
-                                      <h3 style="text-decoration: underline; ">  مسند الصرف </h3>
+                                      <h3 style="text-decoration: underline; ">  مستند الصرف </h3>
                                       <h5>
                                           المدفوع له:
                                           <span t-field="o.partner_id"/>
@@ -21,7 +21,7 @@
                                         <p>
                                             جامعة المشرق
                                         </p>
-                                        <p> :رقم السند</p>
+                                        <p><span t-field="o.bond_number"/>  :رقم السند</p>
                                         <div >
                                             <p style="display: inline-block;" t-field="o.date"/>
                                             <p style="display: inline-block;"> :تاريخ السند</p>
@@ -38,7 +38,7 @@
 								</style>
                                 <thead>
                                     <tr style="">
-                                        <td>إسم الحساب</td>
+                                        <td>رقم الدليل المحاسبي</td>
                                         <td>التفاصيل</td>
                                         <td>مبلغ دائن دينار</td>
                                         <td>مبلغ مدين دينار</td>
@@ -57,7 +57,7 @@
                                                     <p t-field="line.account_id.code" />
                                                 </td>
                                                 <td>
-                                                    <p t-field="line.name" />
+                                                    <p t-field="line.duplicate_name" />
                                                 </td>
                                                 <td>
                                                     <p t-esc="o.add_comma(line.credit)"/>
@@ -102,10 +102,9 @@
                             </table>
                             <div style="text-align: right; border: solid 2px black; overflow: hidden;">
                                 <div class="row" style="padding: 70px 0 70px; border-bottom: solid 2px black; ">
-                                    <div class="col-2">المدير العام</div>
-                                    <div class="col-2">مدير الحسابات</div>
-                                    <div class="col-2">المدقق</div>
-                                    <div class="col-2">المحاسب</div>
+                                    <div class="col-2">رئيس الجامعة</div>
+                                    <div class="col-3">مدير الحسابات</div>
+                                    <div class="col-3">مديرية الرقابة و التدقيق</div>
                                     <div class="col-2">المنظم</div>
                                 </div>
                                 <div style="direction: ltr; padding: 20px;">
@@ -241,7 +240,7 @@
                                 <div col="6" style="padding-left: 34.5rem">
                                     <p>
                                         نوع السداد:
-                                        <span t-field="o.recieve_type" />
+                                        <span t-field="o.bond_type" />
                                     </p>
                                 </div>
                             </div>

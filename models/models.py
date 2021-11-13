@@ -39,13 +39,24 @@ class AccountAccount(models.Model):
 class AccountPayment(models.Model):
 	_inherit = "account.payment"
 
+	BOND_SELECTION = [
+		('check', 'صك'),
+		('payment_recieve', 'مستند القبض'),
+		('payment_paid', 'مستند الدفع'),
+		('payment_document', 'مستند القيد')
+	]
+	bond_type = fields.Selection(BOND_SELECTION, "نوع السند", readonly=True, states={
+								'draft': [('readonly', False)]})
+	bond_number = fields.Char("رقم السند", readonly=True, states={	
+								'draft': [('readonly', False)]})
+
+
+	free_text = fields.Text("وصف")
+
 	real_partner_due = fields.Monetary(
 		string="مستحق الزبون/المجهز", compute="_compute_partner_due", currency_field="company_currency_id")
 	company_currency_id = fields.Many2one("res.currency", default=lambda self: self.env.company.currency_id.id, readonly=True, copy=False)
 	recieve_type = fields.Selection([('cash', 'نقد'), ('check', 'صك')], string="نوع السداد")
-
-
-
 	department = fields.Many2one('op.course', string="Dept", compute="_compute_department", store=True)
 	stage = fields.Selection(string="Stage", related="partner_id.student_id.stage", store=True)
 	category = fields.Many2one(string="Category", related="partner_id.student_id.category_id", store=True)

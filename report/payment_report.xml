@@ -21,7 +21,7 @@
                                         <p>
                                             جامعة المشرق
                                         </p>
-                                        <p><span t-field="o.bond_number"/>  :رقم السند</p>
+                                        <p>:رقم السند</p>
                                         <div >
                                             <p style="display: inline-block;" t-field="o.date"/>
                                             <p style="display: inline-block;"> :تاريخ السند</p>
@@ -76,7 +76,12 @@
                                                 <p t-field="line.account_id.code" />
                                             </td>
                                             <td>
-                                                <p t-field="o.ref" />
+                                                <t t-if="o.payment_type == 'outbound'">
+                                                    <p t-field="o.free_text" />
+                                                </t>
+                                                <t t-else="else">
+                                                    <p t-field="o.ref" />
+                                                </t>
                                             </td>
                                             <td>
                                                 <p t-esc="o.add_comma(line.credit)"/>

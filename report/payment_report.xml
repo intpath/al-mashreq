@@ -64,10 +64,6 @@
                                                 <td>
                                                     <p t-field="line.account_id.code" />
                                                 </td>
-                                                <td>
-                                                    <p t-field="line.duplicate_name" />
-                                                </td>
-
                                                 <td t-if="rowspan > 0 or o.payment_type != 'outbound'" t-att-rowspan="rowspan if o.payment_type == 'outbound' and rowspan > 0 else 1">
                                                     <t t-if="o.payment_type == 'outbound'">
                                                         <p t-field="o.free_text"/>

@@ -47,6 +47,14 @@
                                 <tbody>
                                     <t t-set="total_credit" t-value="0" />
                                     <t t-set="total_debit" t-value="0" />
+
+                                    <!-- getting the required rowsspan -->
+                                    <t t-set="rowspan" t-value="0"/>
+                                    <t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
+                                      <t t-set="rowspan" t-value="rowspan +len(rec[2].move_id.line_ids.filtered(lambda x: not x.account_id.exclude_from_payment_spending_report) )"/>
+                                      <t t-set="rowspan" t-value="rowspan + len(o.move_id.line_ids.filtered(lambda x: not x.account_id.exclude_from_payment_spending_report) )"/>
+                                    </t>
+
                                     <t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
                                         <t t-set="move_id" t-value="rec[2].move_id" />
                                         <t t-foreach="move_id.line_ids" t-as="line">
@@ -59,6 +67,17 @@
                                                 <td>
                                                     <p t-field="line.duplicate_name" />
                                                 </td>
+
+                                                <td t-if="rowspan > 0 or o.payment_type != 'outbound'" t-att-rowspan="rowspan if o.payment_type == 'outbound' and rowspan > 0 else 1">
+                                                    <t t-if="o.payment_type == 'outbound'">
+                                                        <p t-field="o.free_text"/>
+                                                    </t>
+                                                    <t t-else="else">
+                                                        <p t-field="line.duplicate_name"/>
+                                                    </t>
+                                                  <t t-if="o.payment_type == 'outbound' and rowspan > 0" t-set="rowspan" t-value="-1"/>
+                                                </td>
+
                                                 <td>
                                                     <p t-esc="o.add_comma(line.credit)"/>
                                                 </td>
@@ -75,13 +94,14 @@
                                             <td>
                                                 <p t-field="line.account_id.code" />
                                             </td>
-                                            <td>
+                                            <td t-if="rowspan > 0 or o.payment_type != 'outbound'" t-att-rowspan="rowspan if o.payment_type == 'outbound' and rowspan > 0 else 1">
                                                 <t t-if="o.payment_type == 'outbound'">
-                                                    <p t-field="o.free_text" />
+                                                    <p t-field="o.free_text"/>
                                                 </t>
                                                 <t t-else="else">
-                                                    <p t-field="o.ref" />
+                                                    <p t-field="line.ref"/>
                                                 </t>
+                                                <t t-if="o.payment_type == 'outbound' and rowspan > 0" t-set="rowspan" t-value="-1"/>
                                             </td>
                                             <td>
                                                 <p t-esc="o.add_comma(line.credit)"/>

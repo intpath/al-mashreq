@@ -51,9 +51,9 @@
                                     <!-- getting the required rowsspan -->
                                     <t t-set="rowspan" t-value="0"/>
                                     <t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
-                                      <t t-set="rowspan" t-value="rowspan +len(rec[2].move_id.line_ids.filtered(lambda x: not x.account_id.exclude_from_payment_spending_report) )"/>
-                                      <t t-set="rowspan" t-value="rowspan + len(o.move_id.line_ids.filtered(lambda x: not x.account_id.exclude_from_payment_spending_report) )"/>
+                                      <t t-set="rowspan" t-value="rowspan + len(rec[2].move_id.line_ids.filtered(lambda x: not x.account_id.exclude_from_payment_spending_report) )"/>
                                     </t>
+                                    <t t-set="rowspan" t-value="rowspan + len(o.move_id.line_ids.filtered(lambda x: not x.account_id.exclude_from_payment_spending_report) )"/>
 
                                     <t t-foreach="o.move_id._get_reconciled_invoices_partials()" t-as="rec">
                                         <t t-set="move_id" t-value="rec[2].move_id" />

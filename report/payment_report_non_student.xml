@@ -21,7 +21,7 @@
                                         <p>
                                             جامعة المشرق
                                         </p>
-                                        <p>:رقم السند</p>
+                                        <p><span t-field="o.bond_number"/> :رقم السند</p>
                                         <div >
                                             <p style="display: inline-block;" t-field="o.date"/>
                                             <p style="display: inline-block;"> :تاريخ السند</p>

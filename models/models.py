@@ -45,10 +45,8 @@ class AccountPayment(models.Model):
 		('payment_paid', 'مستند الدفع'),
 		('payment_document', 'مستند القيد')
 	]
-	bond_type = fields.Selection(BOND_SELECTION, "نوع السند", readonly=True, states={
-								'draft': [('readonly', False)]})
-	bond_number = fields.Char("رقم السند", readonly=True, states={	
-								'draft': [('readonly', False)]})
+	bond_type = fields.Selection(BOND_SELECTION, "نوع السند")
+	bond_number = fields.Char("رقم السند")
 
 
 	free_text = fields.Text("وصف")

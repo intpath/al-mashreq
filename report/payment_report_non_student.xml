@@ -113,10 +113,10 @@
                                         </td>
                                         <td></td>
                                         <td>
-                                            <p t-esc="total_credit" />
+                                            <p t-esc="o.add_comma(total_credit)" />
                                         </td>
                                         <td>
-                                            <p t-esc="total_debit" />
+                                            <p t-esc="o.add_comma(total_debit)" />
                                         </td>
                                     </tr>
                                 </tbody>

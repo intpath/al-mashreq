@@ -146,7 +146,7 @@
             </t>
         </template>
 
-        <template id="payment_recieving_non_student_report">
+        <template id="payment_recieving_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <div t-attf-class="article o_report_layout_standard o_company_#{o.company_id.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
@@ -182,12 +182,12 @@
 								</style>
                                 <tbody class="equil-w">
                                     <tr>
-                                        <td>اسم الزبون</td>
+                                        <td>اسم الطالب</td>
                                         <td>
                                             <span t-field="o.partner_id.student_id.name" />
                                         </td>
                                     </tr>
-                                    <!-- <tr>
+                                    <tr>
                                         <td>الكلية</td>
                                         <td>
                                             <div t-esc="o.partner_id.student_id.college_id.name" />
@@ -210,7 +210,7 @@
                                         <td>
                                             <span t-field="o.partner_id.student_id.category_id" />
                                         </td>
-                                    </tr> -->
+                                    </tr>
                                 </tbody>
                             </table>
                             <table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">

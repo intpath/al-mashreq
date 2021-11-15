@@ -20,9 +20,14 @@ class AccountMove(models.Model):
     bond_number = fields.Char("رقم السند", readonly=True, states={	
                                  'draft': [('readonly', False)]})
 
+    def add_comma(self, value):
+	    num = int(value) 
+	    return f"{num: ,}"
+
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
     duplicate_name = fields.Text(string="Duplicate Name", compute="_on_change_name")
+    extra_text = fields.Text(string="Extra Text")
 
     @api.onchange('name')
     def _on_change_name(self):

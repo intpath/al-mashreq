@@ -7,7 +7,6 @@ from odoo import models, fields, api
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    # name = fields.Text()
     BOND_SELECTION = [
         ('check', 'صك'),
         ('payment_recieve', 'مستند القبض'),
@@ -49,6 +48,7 @@ class AccountPayment(models.Model):
 	department = fields.Many2one('op.course', string="Dept", compute="_compute_department", store=True)
 	stage = fields.Selection(string="Stage", related="partner_id.student_id.stage", store=True)
 	category = fields.Many2one(string="Category", related="partner_id.student_id.category_id", store=True)
+	destination_account_id = fields.Many2one(domain="")
 
 	@api.depends('partner_id')
 	def _compute_department(self):

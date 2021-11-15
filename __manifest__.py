@@ -24,6 +24,7 @@
         'views/views.xml',
         'views/payment_type_views.xml',
         'report/payment_report.xml',
+        'report/payment_report_non_student.xml',
         'report/account_move_report.xml',
         'report/report_actions.xml',
         'wizard/account_paper_view.xml',

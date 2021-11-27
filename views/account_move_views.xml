@@ -10,7 +10,7 @@
                 <xpath expr="//notebook/page[@id='aml_tab']/field[@name='line_ids']/tree/field[@name='name']" position="after">
                     <field name="extra_text" />
                 </xpath>
-                <xpath expr="//field[@name='amount_total'][2]" position="after">
+                <xpath expr="//field[@name='payment_id']" position="after">
                     <field name="written_amount" />
                 </xpath>
                 <xpath expr="//field[@name='payment_reference']" position="after">

@@ -11,6 +11,7 @@
                     <field name="recieve_type" />
                     <field name="bond_number" />
                     <field name="bond_type" />
+                    <field name="written_amount" />
                     <field name="void" decoration-danger="state == 'cancel'"/>
                 </xpath>
                 <xpath expr="//field[@name='ref']" position="after">

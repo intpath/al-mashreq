@@ -285,7 +285,7 @@
                                         <td colspan="3" style="text-align: right;">
                                             <p>
                                                 المجموع:
-                                                <span t-field="o.amount" />
+                                                <span t-field="o.written_amount" />
                                             </p>
                                         </td>
                                     </tr>

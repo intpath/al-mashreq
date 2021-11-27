@@ -28,6 +28,8 @@ class AccountPayment(models.Model):
     destination_account_id = fields.Many2one(domain="")
 
     void = fields.Char("بطال؟", readonly=True, compute="_is_void")
+    written_amount = fields.Char("المجموع كتابة")
+
 
     @api.depends('state')
     def _is_void(self):

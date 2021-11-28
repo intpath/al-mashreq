@@ -302,7 +302,7 @@
                                 <div col="6" style="padding-left: 34.5rem">
                                     <p>
                                         نوع السداد:
-                                        <span t-field="o.bond_type" />
+                                        <span t-field="o.recieve_type" />
                                     </p>
                                 </div>
                             </div>

@@ -2,9 +2,7 @@
 {
     'name': "Al-Mashreq University",
 
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    'summary': """Customization for Al-Mashreq University""",
 
     'author': "Integerated Path",
     'website': "https://www.int-path.com",
@@ -22,7 +20,9 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
-        'views/payment_type_views.xml',
+        'views/account_account_views.xml',
+        'views/account_move_views.xml',
+        'views/account_payment_views.xml',
         'report/payment_report.xml',
         'report/payment_report_non_student.xml',
         'report/account_move_report.xml',

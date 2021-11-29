@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>الاسم </td>
                                         <td>
-                                            <span t-field="o.partner_id.student_id.name" />
+                                            <span t-field="o.partner_id.name" />
                                         </td>
                                     </tr>
                                     <!-- <tr>

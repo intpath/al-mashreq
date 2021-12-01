@@ -8,7 +8,10 @@ class AccountPaper(models.TransientModel):
 	to_date = fields.Datetime("To Date")
 
 	def format_account_move_data(self):
-		args = [('state', '=', 'posted')]
+		args = [
+			('state', '=', 'posted'),
+			('amount_total', '>' , 0),
+		]
 		if self.from_date:
 			args += [('date', '>=', self.from_date)]
 		if self.to_date:

@@ -20,6 +20,7 @@ class AccountMove(models.Model):
     written_amount = fields.Char("المجموع كتابة")
 
     free_text = fields.Text("وصف")
+    paid_for = fields.Text("المدفوع له")
 
 
     def add_comma(self, value):
@@ -31,7 +32,6 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
     
     duplicate_name = fields.Text(string="Duplicate Name", compute="_on_change_name")
-    extra_text = fields.Text(string="Extra Text")
 
     @api.onchange('name')
     def _on_change_name(self):

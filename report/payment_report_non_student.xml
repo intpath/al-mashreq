@@ -13,7 +13,7 @@
                                       <h3 style="text-decoration: underline; ">  مستند الصرف </h3>
                                       <h5>
                                           المدفوع له:
-                                          <span t-field="o.partner_id"/>
+                                          <span t-field="o.paid_for"/>
                                       </h5>
                                   </div>
                                 <div class="col-4" style="text-align: right;">
@@ -40,6 +40,7 @@
                                     <tr style="">
                                         <td>رقم الدليل المحاسبي</td>
                                         <td>التفاصيل</td>
+                                        <td>Label</td>
                                         <td>مبلغ دائن دينار</td>
                                         <td>مبلغ مدين دينار</td>
                                     </tr>
@@ -78,6 +79,9 @@
                                                 
 
                                                 <td>
+                                                    <p t-esc="line.name"/>
+                                                </td>
+                                                <td>
                                                     <p t-esc="o.add_comma(line.credit)"/>
                                                 </td>
                                                 <td>
@@ -102,6 +106,9 @@
                                                 </t>
                                                 <t t-if="o.move_type == 'entry' and rowspan > 0" t-set="rowspan" t-value="-1"/>
                                             </td>
+                                            <td>
+                                                <p t-esc="line.name"/>
+                                            </td>
 
                                             <td>
                                                 <p t-esc="o.add_comma(line.credit)"/>
@@ -115,6 +122,7 @@
                                         <td col="2">
                                             <p>المجموع فقط</p>
                                         </td>
+                                        <td></td>
                                         <td></td>
                                         <td>
                                             <p t-esc="o.add_comma(total_credit)" />
@@ -135,7 +143,7 @@
                                 <div style="direction: ltr; padding: 20px;">
                                     <p>__________________________________________________________________________ :اني الموقع ادناه إستلمت من</p>
                                     <p></p>
-                                    <p><t t-esc="o.written_amount"/> :مبلغا قدره فقط</p>
+                                    <p>مبلغا قدره فقط: <t t-esc="o.written_amount" style="direction: rtl;"/></p>
                                     <p></p>
                                     <div class="row">
                                         <div class="col-6"></div>

@@ -26,17 +26,33 @@ class AccountPayment(models.Model):
     stage = fields.Selection(string="Stage", related="partner_id.student_id.stage", store=True)
     category = fields.Many2one(string="Category", related="partner_id.student_id.category_id", store=True)
     destination_account_id = fields.Many2one(domain="")
-
     void = fields.Char("بطال؟", readonly=True, compute="_is_void")
     written_amount = fields.Char("المجموع كتابة")
+    canceled_before = fields.Boolean(
+        "Canceled Before?", compute="_canceled_before")
+    can_edit_date = fields.Boolean(
+        "Can Edit Date?", compute="_can_edit_date")
 
 
     @api.depends('state')
     def _is_void(self):
         for record in self:
             record.void = "بطال" if record.state == "cancel" else ""
+
+    @api.depends('state')
+    def _canceled_before(self):
+        for record in self:
+            record.canceled_before = False
+            if record.state == "cancel":
+                record.canceled_before = True
                 
-    
+    def _can_edit_date(self):
+        for record in self:
+            if record.env.user.has_group('account.group_account_manager'):
+                record.can_edit_date = True
+            else:
+                record.can_edit_date = False
+
     @api.depends('partner_id')
     def _compute_department(self):
         for record in self:
@@ -79,9 +95,9 @@ class AccountPayment(models.Model):
         num = int(value) 
         return f"{num: ,}"
 
-    def action_cancel(self):
-        res = super(AccountPayment, self).action_cancel()
+    @api.depends('state')
+    def amount_zero_after_cancel(self):
         for record in self:
-            record.message_post(body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
-            record.amount = 0 
-        return res
+            if record.state == "cancel":
+                record.message_post(body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
+                record.amount = 0 

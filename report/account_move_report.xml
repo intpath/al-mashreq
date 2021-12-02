@@ -15,7 +15,6 @@
 							<p>جامعة المشرق</p>
 							<p>الرقم: <span t-field="o.bond_number"/></p>
 							<p>التاريخ: <span t-field="o.date"/></p>
-							<p>رقم الصفحة اليومية:</p>
 						</div>
 						<table class="table table-sm o_main_table" style="margin-top: 10px; font-size: large; border: solid 2px black;">
 							<style>
@@ -26,7 +25,7 @@
 							<thead>
 								<tr style="text-align: center;">
 									<td>رقم الدليل المحاسبي</td>
-									<td>التفاصيل</td>							
+									<td>التفاصيل</td>				
 									<td>دائن دينار</td>
 									<td>مدين دينار</td>
 								</tr>
@@ -39,7 +38,7 @@
 									<t t-set="total_debit" t-value="total_debit + line.debit"/>
 									<tr>
 										<td><p t-field="line.account_id.code"/></td>
-										<td><p t-field="line.extra_text"/></td>
+										<td><p t-field="line.name"/></td>
 										<td><p t-esc="o.add_comma(line.debit)"/></td>
 										<td><p t-esc="o.add_comma(line.credit)"/></td>
 									</tr>

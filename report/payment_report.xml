@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>الاسم </td>
                                         <td>
-                                            <span t-field="o.partner_id.student_id.name" />
+                                            <span t-field="o.partner_id.name" />
                                         </td>
                                     </tr>
                                     <!-- <tr>
@@ -115,7 +115,7 @@
                                 <div col="6" style="padding-left: 34.5rem">
                                     <p>
                                         نوع السداد:
-                                        <span t-field="o.bond_type" />
+                                        <span t-field="o.recieve_type" />
                                     </p>
                                 </div>
                             </div>

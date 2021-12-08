@@ -40,7 +40,6 @@
                                     <tr style="">
                                         <td>رقم الدليل المحاسبي</td>
                                         <td>التفاصيل</td>
-                                        <td>Label</td>
                                         <td>مبلغ دائن دينار</td>
                                         <td>مبلغ مدين دينار</td>
                                     </tr>
@@ -67,7 +66,7 @@
                                                 <td>
                                                     <p t-field="line.account_id.code" />
                                                 </td>
-                                                <td t-if="rowspan > 0 or o.move_type != 'entry'" t-att-rowspan="rowspan if o.move_type == 'entry' and rowspan > 0 else 1">
+                                                <!-- <td t-if="rowspan > 0 or o.move_type != 'entry'" t-att-rowspan="rowspan if o.move_type == 'entry' and rowspan > 0 else 1">
                                                     <t t-if="o.move_type == 'entry'">
                                                         <p t-field="o.free_text"/>
                                                     </t>
@@ -75,7 +74,7 @@
                                                         <p t-field="line.duplicate_name"/>
                                                     </t>
                                                     <t t-if="o.move_type == 'entry' and rowspan > 0" t-set="rowspan" t-value="-1"/>
-                                                </td>
+                                                </td> -->
                                                 
 
                                                 <td>
@@ -97,7 +96,7 @@
                                             <td>
                                                 <p t-field="line.account_id.code" />
                                             </td>
-                                            <td t-if="rowspan > 0 or o.move_type != 'entry'" t-att-rowspan="rowspan if o.move_type == 'entry' and rowspan > 0 else 1">
+                                            <!-- <td t-if="rowspan > 0 or o.move_type != 'entry'" t-att-rowspan="rowspan if o.move_type == 'entry' and rowspan > 0 else 1">
                                                 <t t-if="o.move_type == 'entry'">
                                                     <p t-field="o.free_text"/>
                                                 </t>
@@ -105,7 +104,7 @@
                                                     <p t-field="line.ref"/>
                                                 </t>
                                                 <t t-if="o.move_type == 'entry' and rowspan > 0" t-set="rowspan" t-value="-1"/>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <p t-esc="line.name"/>
                                             </td>
@@ -122,7 +121,6 @@
                                         <td col="2">
                                             <p>المجموع فقط</p>
                                         </td>
-                                        <td></td>
                                         <td></td>
                                         <td>
                                             <p t-esc="o.add_comma(total_credit)" />

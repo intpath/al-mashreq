@@ -15,7 +15,7 @@
                     <field name="bond_number" />
                     <field name="bond_type" />
                     <field name="written_amount" />
-                    <field name="free_text" />
+                    <field name="free_text" invisible="1"/>
                 </xpath>
                 <xpath expr="//form" position="attributes">
                     <attribute name="delete">0</attribute>

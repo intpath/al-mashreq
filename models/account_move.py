@@ -19,7 +19,7 @@ class AccountMove(models.Model):
 
     written_amount = fields.Char("المجموع كتابة")
 
-    free_text = fields.Text("وصف")
+    free_text = fields.Text("وصف", invisible=True)
     paid_for = fields.Text("المدفوع له")
 
 

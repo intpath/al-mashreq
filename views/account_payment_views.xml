@@ -30,6 +30,10 @@
                 <xpath expr="//header//button[@name='action_cancel']" position="attributes">
                     <attribute name="attrs">{'invisible': ['|', ('canceled_before', '=', True), ('state', '!=', 'draft')]}</attribute>
                 </xpath>
+
+                <xpath expr="//header//button[@name='action_cancel']" position="after">
+                    <button name="action_advisor_cancel" type="object" string="Cancel" attrs="{'invisible': [('state', '!=', 'posted')]}" groups='account.group_account_manager' />
+                </xpath>
                 
                 <xpath expr="//field[@name='date']" position="attributes">
                     <attribute name="attrs">{'readonly': ['|', ('can_edit_date', '=', False), ('state', '!=', 'draft')]}</attribute>

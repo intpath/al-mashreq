@@ -101,3 +101,9 @@ class AccountPayment(models.Model):
             if record.state == "cancel":
                 record.message_post(body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
                 record.amount = 0 
+
+    def action_advisor_cancel(self):
+        ''' draft -> cancelled '''
+        if self.state == 'draft':
+            self.move_id.button_draft()
+        self.move_id.button_cancel()

@@ -95,12 +95,14 @@ class AccountPayment(models.Model):
         num = int(value) 
         return f"{num: ,}"
 
-    @api.depends('state')
+    @api.onchange('state')
     def amount_zero_after_cancel(self):
         for record in self:
             if record.state == "cancel":
                 record.message_post(body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
                 record.amount = 0 
+            else:
+                pass
 
     def action_advisor_cancel(self):
         ''' draft -> cancelled '''

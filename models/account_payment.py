@@ -37,7 +37,14 @@ class AccountPayment(models.Model):
     @api.depends('state')
     def _is_void(self):
         for record in self:
-            record.void = "بطال" if record.state == "cancel" else ""
+            # record.void = "بطال" if record.state == "cancel" else ""
+            if record.state == "cancel":
+                record.void = "بطال"
+                record.message_post(
+                    body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
+                record.amount = 0
+            else:
+                record.void = ""
 
     @api.depends('state')
     def _canceled_before(self):
@@ -95,14 +102,14 @@ class AccountPayment(models.Model):
         num = int(value) 
         return f"{num: ,}"
 
-    @api.onchange('state')
-    def amount_zero_after_cancel(self):
-        for record in self:
-            if record.state == "cancel":
-                record.message_post(body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
-                record.amount = 0 
-            else:
-                pass
+    # @api.depends('state')
+    # def amount_zero_after_cancel(self):
+    #     for record in self:
+    #         if record.state == "cancel":
+    #             record.message_post(body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
+    #             record.amount = 0 
+    #         else:
+    #             pass
 
     def action_advisor_cancel(self):
         ''' draft -> cancelled '''

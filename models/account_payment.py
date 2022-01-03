@@ -34,17 +34,18 @@ class AccountPayment(models.Model):
         "Can Edit Date?", compute="_can_edit_date")
 
 
-    @api.depends('state')
+    @api.constrains('state')
     def _is_void(self):
         for record in self:
             # record.void = "بطال" if record.state == "cancel" else ""
             if record.state == "cancel":
                 record.void = "بطال"
+            else:
+                record.void = ""
+            if record.state == "cancel" and not record.amount == 0:
                 record.message_post(
                     body=f"Paymemt Canceled, Amount was: {record.amount} {record.currency_id.symbol}")
                 record.amount = 0
-            else:
-                record.void = ""
 
     @api.depends('state')
     def _canceled_before(self):
